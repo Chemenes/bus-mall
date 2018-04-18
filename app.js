@@ -65,3 +65,5 @@ function pickNewPictures() {
   button3 = allPictures[Math.floor(Math.random() * allPictures.length)];
   mallImg3.src = button3.url;
 }
+
+pickNewPictures();
