@@ -5,16 +5,17 @@ var productButton1  =document.getElementById('product-button-1');
 var productButton2 = document.getElementById('product-button-2');
 var productButton3 = document.getElementById('product-button-3');
 
-var mallImg1 = document.getElementById('mall-img-1');
-var mallImg2 = document.getElementById('mall-img-2');
-var mallImg3 = document.getElementById('mall-img-3');
+var mallImg1 = document.getElementById('busmallone');
+var mallImg2 = document.getElementById('busmalltwo');
+var mallImg3 = document.getElementById('busmallthree');
 
-
+Pictures.theImage = [];
 
 function Pictures(url, name) {
   this.url = url;
   this.name = name,
   this.votes = 0;
+  this.timesDisplayed = 0;
 
 }
 
@@ -46,6 +47,24 @@ var button1 = allPictures[0];
 var button2 = allPictures[1];
 var button3 = allPictures[2];
 
+Pictures.uniqueImages = function() {
+  var uniquePictures =[];
+  while(uniquePictures.length < 3) {
+    var randomNumber = Math.floor(Math.random() * allPictures.length);
+    if(!Pictures.theImage.includes(randomNumber) && !uniquePictures.includes(randomNumber)){
+      uniquePictures.push(randomNumber);
+      console.log(uniquePictures);
+    }
+    else{
+      console.log('Repeating');
+      console.log(uniquePictures);
+    }
+  }
+  Pictures.theImage = uniquePictures;
+  console.log(uniquePictures);
+  return uniquePictures;
+};
+
 
 
 function handleButton1 (e){
@@ -72,11 +91,17 @@ function handleButton3 (e) {
   totalVote();
   pickNewPictures();
 
+
 }
+
 
 productButton1.addEventListener('click', handleButton1);
 productButton2.addEventListener('click', handleButton2);
 productButton3.addEventListener('click', handleButton3);
+
+
+
+
 
 
 
@@ -103,19 +128,61 @@ function totalVote(){
 }
 
 function pickNewPictures() {
-  button1 = allPictures[Math.floor(Math.random() * allPictures.length)];
+  var randomPictures = Pictures.uniqueImages();
+
+  // var button1 = allPictures[0];
+  // var button2 = allPictures[1];
+  // var button3 = allPictures[2];
+
+
+  //button1 = allPictures[Math.floor(Math.random() * allPictures.length)];
+  button1 = allPictures[randomPictures[0]];
   mallImg1.src = button1.url;
 
-  button2 = allPictures[Math.floor(Math.random() * allPictures.length)];
+
+  //button2 = allPictures[Math.floor(Math.random() * allPictures.length)];
+  button2 = allPictures[randomPictures[1]];
   mallImg2.src = button2.url;
 
-  button3 = allPictures[Math.floor(Math.random() * allPictures.length)];
+  //button3 = allPictures[Math.floor(Math.random() * allPictures.length)];
+  button3 = allPictures[randomPictures[2]];
   mallImg3.src = button3.url;
+
+  allPictures[randomPictures[0]].timesDisplayed++;
+  allPictures[randomPictures[1]].timesDisplayed++;
+  allPictures[randomPictures[2]].timesDisplayed++;
+
+  Pictures.url = allPictures[randomPictures[0]].url;
+  Pictures.busmall1.alt = allPictures[randomPictures[0]].name;
+
+  Pictures.url = allPictures[randomPictures[0]].url;
+  Pictures.busmall2.alt = allPictures[randomPictures[0]].name;
+
+  Pictures.url = allPictures[randomPictures[0]].url;
+  Pictures.busmall3.alt = allPictures[randomPictures[0]].name;
+
+  Pictures.url = allPictures[randomPictures[1]].url;
+  Pictures.busmall1.alt = allPictures[randomPictures[1]].name;
+
+  Pictures.url = allPictures[randomPictures[1]].url;
+  Pictures.busmall2.alt = allPictures[randomPictures[1]].name;
+
+  Pictures.url = allPictures[randomPictures[1]].url;
+  Pictures.busmall3.alt = allPictures[randomPictures[1]].name;
+
+  Pictures.url = allPictures[randomPictures[2]].url;
+  Pictures.busmall1.alt = allPictures[randomPictures[2]].name;
+
+  Pictures.url = allPictures[randomPictures[2]].url;
+  Pictures.busmall2.alt = allPictures[randomPictures[2]].name;
+
+  Pictures.url = allPictures[randomPictures[2]].url;
+  Pictures.busmall3.alt = allPictures[randomPictures[2]].name;
 
 
 }
 
-pickNewPictures();
+// pickNewPictures();
 
 var totalUl = document.getElementById('total');
 
@@ -132,3 +199,4 @@ function showResults() {
 
 
 }
+pickNewPictures();
