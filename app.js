@@ -1,5 +1,6 @@
 'use strict';
 
+
 var productButton1  =document.getElementById('product-button-1');
 var productButton2 = document.getElementById('product-button-2');
 var productButton3 = document.getElementById('product-button-3');
@@ -45,6 +46,8 @@ var button1 = allPictures[0];
 var button2 = allPictures[1];
 var button3 = allPictures[2];
 
+
+
 function handleButton1 (e){
   button1.votes++;
   totalClickCounter++;
@@ -76,6 +79,8 @@ productButton2.addEventListener('click', handleButton2);
 productButton3.addEventListener('click', handleButton3);
 
 
+
+
 // productButton2.addEventListener('click', function (e) {
 //   button2.votes++;
 //   totalClickCounter++;
@@ -88,7 +93,7 @@ productButton3.addEventListener('click', handleButton3);
 //   pickNewPictures();
 // });
 function totalVote(){
-  if (totalClickCounter === 6) {
+  if (totalClickCounter === 25) {
     productButton1.removeEventListener('click', handleButton1);
     productButton2.removeEventListener('click', handleButton2);
     productButton3.removeEventListener('click', handleButton3);
@@ -106,6 +111,8 @@ function pickNewPictures() {
 
   button3 = allPictures[Math.floor(Math.random() * allPictures.length)];
   mallImg3.src = button3.url;
+
+
 }
 
 pickNewPictures();
@@ -118,6 +125,8 @@ function showResults() {
     ulLi.textContent = ' ' + allPictures[i].name + ' ' + allPictures[i].votes;
     totalUl.appendChild(ulLi);
   }
+
+
 
 
 
