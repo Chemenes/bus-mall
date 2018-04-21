@@ -17,7 +17,13 @@ function Pictures(url, name) {
   this.votes = 0;
   this.timesDisplayed = 0;
 
+
+
 }
+var allLabels = [];
+var data = [];
+var randomColors = [];
+
 
 var totalClickCounter = 0;
 
@@ -122,6 +128,7 @@ function totalVote(){
     productButton1.removeEventListener('click', handleButton1);
     productButton2.removeEventListener('click', handleButton2);
     productButton3.removeEventListener('click', handleButton3);
+    Pictures.createVotes();
     showResults();
 
   }
@@ -153,36 +160,20 @@ function pickNewPictures() {
   allPictures[randomPictures[2]].timesDisplayed++;
 
   Pictures.url = allPictures[randomPictures[0]].url;
-  Pictures.busmall1.alt = allPictures[randomPictures[0]].name;
-
-  Pictures.url = allPictures[randomPictures[0]].url;
-  Pictures.busmall2.alt = allPictures[randomPictures[0]].name;
-
-  Pictures.url = allPictures[randomPictures[0]].url;
-  Pictures.busmall3.alt = allPictures[randomPictures[0]].name;
+  Pictures.url = allPictures[randomPictures[0]].url;Pictures.url = allPictures[randomPictures[0]].url;
 
   Pictures.url = allPictures[randomPictures[1]].url;
-  Pictures.busmall1.alt = allPictures[randomPictures[1]].name;
-
   Pictures.url = allPictures[randomPictures[1]].url;
-  Pictures.busmall2.alt = allPictures[randomPictures[1]].name;
-
   Pictures.url = allPictures[randomPictures[1]].url;
-  Pictures.busmall3.alt = allPictures[randomPictures[1]].name;
 
   Pictures.url = allPictures[randomPictures[2]].url;
-  Pictures.busmall1.alt = allPictures[randomPictures[2]].name;
-
   Pictures.url = allPictures[randomPictures[2]].url;
-  Pictures.busmall2.alt = allPictures[randomPictures[2]].name;
-
   Pictures.url = allPictures[randomPictures[2]].url;
-  Pictures.busmall3.alt = allPictures[randomPictures[2]].name;
 
 
 }
 
-// pickNewPictures();
+pickNewPictures();
 
 var totalUl = document.getElementById('total');
 
@@ -192,7 +183,7 @@ function showResults() {
     ulLi.textContent = ' ' + allPictures[i].name + ' ' + allPictures[i].votes;
     totalUl.appendChild(ulLi);
   }
-
+  renderChart();
 
 
 
@@ -200,3 +191,45 @@ function showResults() {
 
 }
 pickNewPictures();
+
+
+
+Pictures.createVotes = function () {
+  for(var i = 0; i < allPictures.length;i++){
+    allLabels[i] = allPictures[i].name;
+    data[i] = allPictures[i].votes;
+    randomColors.push('#' + Math.floor(Math.random() * 16777215).toString(16));
+
+  }
+};
+
+
+function renderChart(){
+  console.log(allLabels);
+  var ctx = document.getElementById('myChart');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: allLabels,
+      datasets: [{
+        data: data,
+        backgroundColor: randomColors,
+        hoverBackgroundColor: 'Orange'
+
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      },
+      title: {
+        display: true,
+        text: 'Results'
+      }
+    }
+  });
+}
